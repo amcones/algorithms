@@ -1,7 +1,8 @@
 /*
  * Author: uli
  * License: MIT
- * Description:
+ * Description: 邻接多重表，删改方便
+ * 每条边挂载到两个节点邻接表上，只存一次
  * Time: 2025-06-10 00:24:27 +0800
  */
 

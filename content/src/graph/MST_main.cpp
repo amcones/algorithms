@@ -1,7 +1,7 @@
 /*
  * Author: uli
  * License: MIT
- * Description:
+ * Description: 最小生成树，同时测试两种算法
  * Time: 2025-06-10 00:24:26 +0800
  */
 

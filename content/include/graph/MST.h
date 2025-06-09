@@ -1,7 +1,7 @@
 /*
  * Author: uli
  * License: MIT
- * Description:
+ * Description: 最小生成树，顶点编号从 0 开始
  * Time: 2025-06-10 00:15:36 +0800
  */
 
