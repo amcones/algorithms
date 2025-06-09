@@ -8,7 +8,7 @@
 #include "strings/kmp.h"
 #include <iostream>
 
-int main(int argc, char *argv[]) {
+int main() {
     const std::string s = "abcdabcxabcabcd";
     const std::string p = "abcd";
     const std::vector<int> matched_kmp = match_string_kmp(s, p);
