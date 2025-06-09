@@ -1,4 +1,4 @@
 add_executable(adjacency_multilist_main adjacency_multilist_main.cpp)
-add_executable(front_star_main front_star_main.cpp)
+add_executable(MST_main MST_main.cpp)
 target_include_directories(adjacency_multilist_main PRIVATE ${CMAKE_SOURCE_DIR}/include)
-target_include_directories(front_star_main PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(MST_main PRIVATE ${CMAKE_SOURCE_DIR}/include)
