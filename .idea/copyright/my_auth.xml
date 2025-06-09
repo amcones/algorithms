@@ -1,0 +1,7 @@
+<component name="CopyrightManager">
+  <copyright>
+    <option name="keyword" value="Author" />
+    <option name="notice" value="Author: &amp;#36;username&#10;License: MIT&#10;Description: &#10;Time: &amp;#36;file.lastModified.format(&quot;YYYY-MM-dd HH:mm:ss Z&quot;)" />
+    <option name="myName" value="my_auth" />
+  </copyright>
+</component>
