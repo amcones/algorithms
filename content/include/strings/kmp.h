@@ -1,7 +1,7 @@
 /*
  * Author: uli
  * License: MIT
- * Description:
+ * Description: 字符串匹配算法
  * Time: 2025-06-09 22:58:26 +0800
  */
 

@@ -1,7 +1,7 @@
 /*
  * Author: uli
  * License: MIT
- * Description:
+ * Description: 字符串匹配，同时测试 KMP 和 BF 算法
  * Time: 2025-06-09 21:16:01 +0800
  */
 

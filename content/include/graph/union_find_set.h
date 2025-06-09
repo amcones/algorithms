@@ -1,7 +1,7 @@
 /*
  * Author: uli
  * License: MIT
- * Description:
+ * Description: 并查集，实现了路径压缩和按秩合并
  * Time: 2025-06-10 00:31:52 +0800
  */
 

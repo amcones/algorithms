@@ -1,7 +1,7 @@
 /*
  * Author: uli
  * License: MIT
- * Description:
+ * Description: 链式前向星，数组模拟邻接表
  * Time: 2025-06-10 00:19:13 +0800
  */
 
