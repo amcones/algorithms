@@ -17,7 +17,7 @@ constexpr int INF = 0x3f3f3f3f;
 
 /**
  * Prim 算法，选点
- * O(nlog(n))
+ * O((n + m) log(n))
  * @param g 图
  * @param s 起始点
  * @return MST 的权值总和
