@@ -17,8 +17,9 @@ struct Front_Star_Graph {
     std::vector<int> head;
     std::vector<Edge> edge;
     std::vector<int> vis;
+    int cnt;
 
-    explicit Front_Star_Graph(const int n): head(n, -1), vis(n) {
+    explicit Front_Star_Graph(const int n): head(n, -1), vis(n), cnt(n) {
     }
 
     /**
