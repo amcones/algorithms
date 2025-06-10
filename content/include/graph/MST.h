@@ -23,7 +23,7 @@ constexpr int INF = 0x3f3f3f3f;
  * @return MST 的权值总和
  */
 inline int prim(Front_Star_Graph &g, const int s) {
-    const auto n = g.head.size();
+    auto &[head,edge,vis,n] = g;
     std::vector dis(n, INF);
     std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int> >, std::greater<> > pq;
     int tot = 0;
@@ -32,18 +32,18 @@ inline int prim(Front_Star_Graph &g, const int s) {
     while (!pq.empty()) {
         const int u = pq.top().second;
         pq.pop();
-        if (g.vis[u]) continue;
-        g.vis[u] = true;
+        if (vis[u]) continue;
+        vis[u] = true;
         tot += dis[u];
-        for (int i = g.head[u]; ~i; i = g.edge[i].next) {
-            const int v = g.edge[i].to, w = g.edge[i].weight;
-            if (!g.vis[v] && w < dis[v]) {
+        for (int i = head[u]; ~i; i = edge[i].next) {
+            const int v = edge[i].to, w = edge[i].weight;
+            if (!vis[v] && w < dis[v]) {
                 dis[v] = w;
                 pq.emplace(dis[v], v);
             }
         }
     }
-    for (const auto v: g.vis) {
+    for (const auto v: vis) {
         if (!v) return -1;
     }
     return tot;
@@ -57,11 +57,11 @@ inline int prim(Front_Star_Graph &g, const int s) {
  * @return MST 的权值总和
  */
 inline int kruskal(Front_Star_Graph g) {
-    const auto n = g.head.size();
+    auto &[head,edge,vis,n] = g;
     union_find_set ufs(n);
-    std::ranges::sort(g.edge, [](const Edge &a, const Edge &b) { return a.weight < b.weight; });
+    std::ranges::sort(edge, [](const Edge &a, const Edge &b) { return a.weight < b.weight; });
     int cnt = 0, tot = 0;
-    for (const auto e: g.edge) {
+    for (const auto e: edge) {
         const int fu = ufs.find(e.from), fv = ufs.find(e.to);
         if (fu != fv) {
             tot += e.weight;
