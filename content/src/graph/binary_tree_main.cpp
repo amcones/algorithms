@@ -8,65 +8,37 @@
 #include "graph/binary_tree.h"
 
 int main() {
-    std::vector<std::string> tree = {"A", "B", "C", "D", "E"};
-    const BinaryTreeNode *root = nullptr;
-    root = build_by_level(tree);
-    if (!root) return -1;
-    std::vector<std::string> pre, in, post, level;
-    root->preOrder(pre);
-    root->inOrder(in);
-    root->postOrder(post);
-    root->levelOrder(level);
+    const std::vector<std::string> levelData = {"A", "B", "C", "D", "E"};
+    const BinaryTree<std::string> *tree = new BinaryTree(BinaryTree<std::string>::build_by_level(levelData));
+
+    auto visit = [](const BinaryTreeNode<std::string> *node) {
+        std::cout << node->data << ' ';
+    };
 
     std::cout << "preOrder: ";
-    for (const auto &s: pre) {
-        std::cout << s << ' ';
-    }
+    tree->preOrder(tree->root, visit);
+    std::cout << std::endl;
+    std::cout << "preOrder with no recursive: ";
+    tree->preOrder_no_recursive(visit);
     std::cout << std::endl;
 
     std::cout << "inOrder: ";
-    for (const auto &s: in) {
-        std::cout << s << ' ';
-    }
+    tree->inOrder(tree->root, visit);
+    std::cout << std::endl;
+    std::cout << "inOrder with no recursive: ";
+    tree->inOrder_no_recursive(visit);
     std::cout << std::endl;
 
     std::cout << "postOrder: ";
-    for (const auto &s: post) {
-        std::cout << s << ' ';
-    }
+    tree->postOrder(tree->root, visit);
+    std::cout << std::endl;
+    std::cout << "postOrder with no recursive: ";
+    tree->postOrder_no_recursive(visit);
     std::cout << std::endl;
 
     std::cout << "levelOrder: ";
-    for (const auto &s: level) {
-        std::cout << s << ' ';
-    }
+    tree->levelOrder(visit);
     std::cout << std::endl;
 
-    pre.clear();
-    in.clear();
-    post.clear();
-
-    root->preOrder_no_recursive(pre);
-    root->inOrder_no_recursive(in);
-    root->postOrder_no_recursive(post);
-
-    std::cout << "preOrder with no recursive: ";
-    for (const auto &s: pre) {
-        std::cout << s << ' ';
-    }
-    std::cout << std::endl;
-
-    std::cout << "inOrder with no recursive: ";
-    for (const auto &s: in) {
-        std::cout << s << ' ';
-    }
-    std::cout << std::endl;
-
-    std::cout << "postOrder with no recursive: ";
-    for (const auto &s: post) {
-        std::cout << s << ' ';
-    }
-    std::cout << std::endl;
-
-
+    delete(tree);
 }

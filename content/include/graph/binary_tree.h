@@ -2,6 +2,8 @@
  * Author: uli
  * License: MIT
  * Description: 二叉树定义与遍历
+ * 使用了模版类，允许改变数据类型和访问器
+ * 但由于构建方式不完善，目前数据类型仅支持 string
  * Time: 2025-06-10 01:10:06 +0800
  */
 
@@ -9,58 +11,81 @@
 #define TREE_H
 #include <iostream>
 
+template<typename T>
 struct BinaryTreeNode {
-    std::string data;
+    T data;
     BinaryTreeNode *left, *right;
 
-    explicit BinaryTreeNode(std::string data): data(std::move(data)), left(nullptr), right(nullptr) {
+    explicit BinaryTreeNode(T data): data(std::move(data)), left(nullptr), right(nullptr) {
+    }
+};
+
+template<typename T>
+struct BinaryTree {
+    BinaryTreeNode<T> *root;
+
+    explicit BinaryTree(BinaryTreeNode<T> *root): root(root) {
     }
 
-    void preOrder(std::vector<std::string> &pre) const {
-        pre.push_back(data);
-        if (left) left->preOrder(pre);
-        if (right) right->preOrder(pre);
+    ~BinaryTree() {
+        auto remove = [](const BinaryTreeNode<T> *node) {
+            delete node;
+        };
+        postOrder(root, remove); // 确保根最后被删除
     }
 
-    void inOrder(std::vector<std::string> &in) const {
-        if (left) left->inOrder(in);
-        in.push_back(data);
-        if (right) right->inOrder(in);
+    template<typename VST>
+    void preOrder(BinaryTreeNode<T> *node, VST &visit) const {
+        visit(node);
+        if (node->left) preOrder(node->left, visit);
+        if (node->right) preOrder(node->right, visit);
     }
 
-    void postOrder(std::vector<std::string> &post) const {
-        if (left) left->postOrder(post);
-        if (right) right->postOrder(post);
-        post.push_back(data);
+    template<typename VST>
+    void inOrder(BinaryTreeNode<T> *node, VST &visit) const {
+        if (node->left) inOrder(node->left, visit);
+        visit(node);
+        if (node->right) inOrder(node->right, visit);
     }
 
-    void levelOrder(std::vector<std::string> &level) const {
-        std::queue<const BinaryTreeNode *> q;
-        q.push(this);
+
+    template<typename VST>
+    void postOrder(BinaryTreeNode<T> *node, VST &visit) const {
+        if (node->left) postOrder(node->left, visit);
+        if (node->right) postOrder(node->right, visit);
+        visit(node);
+    }
+
+    template<typename VST>
+    void levelOrder(VST &visit) const {
+        std::queue<const BinaryTreeNode<T> *> q;
+        q.push(root);
         while (!q.empty()) {
             const auto node = q.front();
             q.pop();
-            level.push_back(node->data);
+            visit(node);
             if (node->left)q.push(node->left);
             if (node->right)q.push(node->right);
         }
     }
 
-    void preOrder_no_recursive(std::vector<std::string> &pre) const {
-        std::stack<const BinaryTreeNode *> stk;
-        stk.push(this);
+    template<typename VST>
+    void preOrder_no_recursive(VST &visit) const {
+        std::stack<const BinaryTreeNode<T> *> stk;
+        stk.push(root);
         while (!stk.empty()) {
             const auto node = stk.top();
             stk.pop();
-            pre.push_back(node->data);
+            visit(node);
             if (node->right) stk.push(node->right);
             if (node->left) stk.push(node->left);
         }
     }
 
-    void inOrder_no_recursive(std::vector<std::string> &in) const {
-        std::stack<const BinaryTreeNode *> stk;
-        auto cur = this;
+    template<typename VST>
+    void inOrder_no_recursive(VST &visit) const {
+        std::stack<BinaryTreeNode<T> *> stk;
+        auto cur = root;
 
         while (!stk.empty() || cur) {
             while (cur) {
@@ -69,16 +94,17 @@ struct BinaryTreeNode {
             }
             if (!stk.empty()) {
                 cur = stk.top();
-                in.push_back(cur->data);
+                visit(cur);
                 stk.pop();
                 cur = cur->right;
             }
         }
     }
 
-    void postOrder_no_recursive(std::vector<std::string> &post) const {
-        std::stack<const BinaryTreeNode *> s1, s2;
-        s1.push(this);
+    template<typename VST>
+    void postOrder_no_recursive(VST &visit) const {
+        std::stack<const BinaryTreeNode<T> *> s1, s2;
+        s1.push(root);
 
         while (!s1.empty()) {
             auto node = s1.top();
@@ -90,35 +116,36 @@ struct BinaryTreeNode {
         }
 
         while (!s2.empty()) {
-            post.push_back(s2.top()->data);
+            visit(s2.top());
             s2.pop();
         }
     }
+
+    static BinaryTreeNode<T>* build_by_level(const std::vector<T> &levelOrder) {
+        if (levelOrder.empty()) return nullptr;
+
+        auto *root = new BinaryTreeNode<T>(levelOrder[0]);
+        std::queue<BinaryTreeNode<T> *> q;
+        q.push(root);
+
+        for (int i = 1; i < levelOrder.size() && !q.empty(); i++) {
+            auto *curr = q.front();
+            q.pop();
+
+            if (!levelOrder[i].empty()) {
+                curr->left = new BinaryTreeNode<T>(levelOrder[i]);
+                q.push(curr->left);
+            }
+            i++;
+
+            if (i < levelOrder.size() && !levelOrder[i].empty()) {
+                curr->right = new BinaryTreeNode<T>(levelOrder[i]);
+                q.push(curr->right);
+            }
+        }
+        return root;
+    }
 };
 
-inline BinaryTreeNode *build_by_level(const std::vector<std::string> &levelOrder) {
-    if (levelOrder.empty()) return nullptr;
 
-    auto *root = new BinaryTreeNode(levelOrder[0]);
-    std::queue<BinaryTreeNode *> q;
-    q.push(root);
-
-    for (int i = 1; i < levelOrder.size() && !q.empty(); i++) {
-        BinaryTreeNode *curr = q.front();
-        q.pop();
-
-        if (!levelOrder[i].empty()) {
-            curr->left = new BinaryTreeNode(levelOrder[i]);
-            q.push(curr->left);
-        }
-        i++;
-
-        if (i < levelOrder.size() && !levelOrder[i].empty()) {
-            curr->right = new BinaryTreeNode(levelOrder[i]);
-            q.push(curr->right);
-        }
-    }
-
-    return root;
-}
 #endif //TREE_H
