@@ -6,6 +6,8 @@ C++20 standard, each algorithm has a runnable test case. Detailed documents are 
 See [docs/](.) for detailed documentation, and [content/include/](./content/include) for raw source code of algorithm implementation,
 and [content/src/](./content/src) for runnable test cases.
 
+The code in this repository is all under the MIT License, while the documentation, except for the referenced parts, follows the [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) License.
+
 ## Introduction
 
 While learning algorithms, deepen understanding and memory through implementation.
