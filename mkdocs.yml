@@ -37,7 +37,7 @@ repo_url: 'https://github.com/amcones/algorithms'
 edit_uri: edit/main/docs/
 
 # Copyright
-copyright: 'Copyright &copy; 2016 - 2025 James Amcones'
+copyright: '<a href="https://github.com/amcones/algorithms">algorithms</a> © 2025 by <a href="https://amcones.cn">James Amcones</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a><img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" style="max-width: 1em;max-height:1em;margin-left: .2em;"><img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" style="max-width: 1em;max-height:1em;margin-left: .2em;">'
 
 plugins:
   - git-revision-date-localized:
