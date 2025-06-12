@@ -1,0 +1,57 @@
+site_name: algorithms
+site_description: My algorithm templates.
+site_author: James Amcones
+site_url: https://amcones.cn/algorithms
+theme:
+  name: material
+  language: 'zh'
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: red
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+  features:
+    - navigation.footer
+    - content.action.edit
+    - content.action.view
+    - search.suggest
+    - search.share
+# Repository
+repo_name: 'amcones/algorithms'
+repo_url: 'https://github.com/amcones/algorithms'
+edit_uri: edit/main/docs/
+
+# Copyright
+copyright: 'Copyright &copy; 2016 - 2025 James Amcones'
+
+plugins:
+  - git-revision-date-localized:
+      type: datetime
+      enable_creation_date: true
+  - tags
+  - search
+
+markdown_extensions:
+  - footnotes
+  - meta
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
