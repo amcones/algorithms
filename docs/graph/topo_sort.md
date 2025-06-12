@@ -1,4 +1,4 @@
-# 拓扑排序
+# [拓扑排序](https://github.com/amcones/algorithms/tree/main/content/include/graph/topo_sort.h)
 
 1. 从图中选择一个入度为 0 的点
 2. 删除该点及其所有出边

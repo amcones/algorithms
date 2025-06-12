@@ -10,7 +10,7 @@
 
 ## 算法
 
-常用算法有两种：Prim 和 Kruskal，查看 [实现](../../content/include/graph/MST.h)。
+常用算法有两种：Prim 和 Kruskal，查看 [实现](https://github.com/amcones/algorithms/tree/main/content/include/graph/MST.h)。
 
 - Prim：选点。适合稠密图。每次找到距离 MST 最小的一点加入，可用堆维护。
 - Kruskal：选边。适合稀疏图。从小到大加入边，过程是维护一个森林，查询两个节点是否在同一棵树，连接两棵树。使用并查集维护。
