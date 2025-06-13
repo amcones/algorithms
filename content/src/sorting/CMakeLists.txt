@@ -1,3 +1,3 @@
-add_executable(shell_sort_main shell_sort_main.cpp)
+add_executable(sort_main sort_main.cpp)
 
-target_include_directories(shell_sort_main PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_include_directories(sort_main PRIVATE ${CMAKE_SOURCE_DIR}/include)

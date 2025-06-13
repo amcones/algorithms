@@ -8,14 +8,14 @@
 #include <iostream>
 #include <random>
 
-#include "sorting/shell_sort.h"
+#include "sorting/sorting.h"
 
 int main() {
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_int_distribution<> dist(0, 100);
     std::vector<int> a(20);
-    std::generate(a.begin(), a.end(), [&]() { return dist(gen); });
+    std::ranges::generate(a, [&]() { return dist(gen); });
     std::cout << "original array: \n";
     for (const int i: a) {
         std::cout << i << ' ';
@@ -52,8 +52,40 @@ int main() {
     std::cout << std::endl;
 
     b = a;
+    select_sort(b);
+    std::cout << "select sorted array: \n";
+    for (const int i: b) {
+        std::cout << i << ' ';
+    }
+    std::cout << std::endl;
+
+    b = a;
+    bubble_sort(b);
+    std::cout << "bubble sorted array: \n";
+    for (const int i: b) {
+        std::cout << i << ' ';
+    }
+    std::cout << std::endl;
+
+    b = a;
     quick_sort(b);
     std::cout << "quick sorted array: \n";
+    for (const int i: b) {
+        std::cout << i << ' ';
+    }
+    std::cout << std::endl;
+
+    b = a;
+    heap_sort(b);
+    std::cout << "heap sorted array: \n";
+    for (const int i: b) {
+        std::cout << i << ' ';
+    }
+    std::cout << std::endl;
+
+    b = a;
+    merge_sort(b);
+    std::cout << "merge sorted array: \n";
     for (const int i: b) {
         std::cout << i << ' ';
     }
