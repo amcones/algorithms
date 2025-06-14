@@ -1,6 +1,6 @@
 # Introducing
 
-My algorithm template. Contains commonly used algorithms and data structures in competitions and academia. Written in
+My algorithm templates. Contains commonly used algorithms and data structures in competitions and academia. Written in
 C++20 standard, each algorithm has a runnable test case. Detailed documents are included, explaining various ideas and
 key implementation points.
 
